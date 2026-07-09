@@ -1,0 +1,612 @@
+/* =========================================================
+   Nizam’s Chronicle — Page Layouts
+   Hero, quick facts, featured destinations, stats, gallery,
+   travel tips, auth screen, page-specific, responsive
+   ========================================================= */
+
+/* ---------- Hero ---------- */
+.hero-viewport {
+    position: relative;
+    min-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #ffffff;
+    padding: 140px 20px 120px;
+    overflow: hidden;
+}
+
+.hero-viewport::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        url('https://commons.wikimedia.org/wiki/Special:FilePath/A%20Landscape%20shot%20of%20the%20Charminar.jpg?width=1900')
+        center 38% / cover no-repeat;
+    z-index: -2;
+}
+
+.hero-viewport::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg, rgba(10, 15, 12, 0.55) 0%, rgba(10, 15, 12, 0.42) 45%, rgba(10, 15, 12, 0.82) 100%);
+    z-index: -1;
+}
+
+.hero-inner {
+    max-width: 760px;
+}
+
+.hero-eyebrow {
+    font-family: var(--font-plaque);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.hero-eyebrow::before {
+    content: "";
+    width: 34px;
+    height: 1px;
+    background: var(--gold-soft);
+}
+
+.hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 4.4vw + 1rem, 4.2rem);
+    font-weight: 600;
+    line-height: 1.08;
+    margin-bottom: 20px;
+    max-width: 17ch;
+}
+
+.hero-title em {
+    font-style: italic;
+    color: var(--gold-soft);
+}
+
+.hero-subtitle {
+    font-size: clamp(1rem, 0.4vw + 0.95rem, 1.2rem);
+    margin-bottom: 32px;
+    max-width: 540px;
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+/* ---------- Quick facts strip (floats over hero, like an ASI info board) ---------- */
+.quick-facts {
+    background-color: var(--surface);
+    max-width: 1080px;
+    margin: -64px auto 0;
+    padding: 0;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    position: relative;
+    z-index: 10;
+}
+
+.quick-fact {
+    padding: 28px 20px;
+    text-align: center;
+    border-right: 1px solid var(--border-color);
+}
+
+.quick-fact:last-child {
+    border-right: none;
+}
+
+.quick-fact strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 1.6vw + 1rem, 2rem);
+    font-weight: 700;
+    color: var(--teal);
+    margin-bottom: 4px;
+}
+
+.quick-fact span {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--granite-soft);
+    text-transform: uppercase;
+}
+
+/* ---------- Featured destinations (alternating split rows) ---------- */
+.featured-row {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 56px;
+    align-items: center;
+}
+
+.featured-row:not(:last-child) {
+    margin-bottom: clamp(56px, 7vw, 96px);
+}
+
+.featured-row.is-reversed {
+    grid-template-columns: 0.95fr 1.05fr;
+}
+
+.featured-row.is-reversed .featured-media {
+    order: 2;
+}
+
+.featured-media {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    aspect-ratio: 4 / 3.1;
+}
+
+.featured-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.featured-row:hover .featured-media img {
+    transform: scale(1.045);
+}
+
+.featured-index {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    background: rgba(23, 19, 15, 0.72);
+    color: var(--gold-soft);
+    font-family: var(--font-plaque);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    padding: 6px 12px;
+    border-radius: 999px;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+}
+
+.featured-copy .heading-lg {
+    margin-bottom: 16px;
+}
+
+.featured-copy p {
+    margin-bottom: 22px;
+}
+
+.featured-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 28px;
+    margin-bottom: 26px;
+    font-family: var(--font-plaque);
+    font-size: 13px;
+    color: var(--granite-soft);
+}
+
+.featured-meta strong {
+    color: var(--ink);
+    font-weight: 600;
+}
+
+/* ---------- Stats / highlights section (dark, jali lattice texture) ---------- */
+.stats-section {
+    background-color: var(--footer-bg);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.stats-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.5;
+    background-image:
+        repeating-linear-gradient(45deg, rgba(171, 125, 47, 0.07) 0, rgba(171, 125, 47, 0.07) 1px, transparent 1px, transparent 34px),
+        repeating-linear-gradient(-45deg, rgba(171, 125, 47, 0.07) 0, rgba(171, 125, 47, 0.07) 1px, transparent 1px, transparent 34px);
+}
+
+.stats-section .container {
+    position: relative;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    margin-top: 8px;
+}
+
+.stat-card {
+    text-align: center;
+    padding: 8px;
+}
+
+.stat-number {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 3.2vw + 1rem, 3.4rem);
+    font-weight: 700;
+    color: var(--gold-soft);
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 2px;
+}
+
+.stat-label {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #c8bea8;
+    max-width: 22ch;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ---------- Gallery ---------- */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 170px;
+    gap: 14px;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    cursor: pointer;
+    background-color: var(--pearl-dim);
+}
+
+.gallery-item.is-tall {
+    grid-row: span 2;
+}
+
+.gallery-item.is-wide {
+    grid-column: span 2;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-medium);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.06);
+}
+
+.gallery-caption {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 14px 16px;
+    background: linear-gradient(180deg, transparent, rgba(15, 12, 9, 0.82));
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.gallery-item:hover .gallery-caption,
+.gallery-item:focus-visible .gallery-caption {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ---------- Travel tips ---------- */
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+/* ---------- Split grid (About / Contact) ---------- */
+.split-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+}
+
+.rounded-img {
+    border-radius: var(--radius-md);
+    width: 100%;
+    box-shadow: var(--shadow-md);
+}
+
+/* ---------- CTA banner ---------- */
+.cta-banner {
+    background-color: var(--teal-deep);
+    background-image: linear-gradient(135deg, var(--teal-deep), var(--teal));
+    border-radius: var(--radius-lg);
+    padding: clamp(36px, 5vw, 64px);
+    text-align: center;
+    color: #fff;
+}
+
+.cta-banner .heading-lg {
+    color: #fff;
+    margin-bottom: 14px;
+}
+
+.cta-banner p {
+    color: rgba(255, 255, 255, 0.86);
+    max-width: 52ch;
+    margin: 0 auto 28px;
+}
+
+.cta-actions {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* ---------- Auth screen ---------- */
+.auth-frame {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: calc(100vh - var(--header-height));
+}
+
+.auth-backdrop {
+    position: relative;
+    background:
+        url('https://commons.wikimedia.org/wiki/Special:FilePath/Buddha%20Statue%20of%20Hyderabad.JPG?width=1200')
+        center/cover no-repeat;
+}
+
+.auth-backdrop::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(10, 15, 12, 0.2), rgba(10, 15, 12, 0.6));
+}
+
+.auth-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.auth-panel-inner {
+    width: 100%;
+    max-width: 380px;
+}
+
+.auth-heading {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 1.6vw + 1rem, 2rem);
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--ink);
+}
+
+.auth-text {
+    color: var(--granite-soft);
+    font-size: 14px;
+    margin-bottom: 28px;
+}
+
+/* ---------- Contact page ---------- */
+.contact-heading {
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 2.2vw + 1rem, 2.5rem);
+    font-weight: 700;
+    margin-bottom: 14px;
+    color: var(--ink);
+}
+
+.contact-description {
+    color: var(--granite-soft);
+    margin-bottom: 28px;
+    max-width: 46ch;
+}
+
+.contact-info-list {
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contact-info-list address {
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contact-form-panel {
+    background-color: var(--surface);
+    padding: 36px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+}
+
+/* ---------- Thank-you page ---------- */
+.thank-you-main {
+    min-height: 55vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.thank-you-card {
+    max-width: 480px;
+    padding: 20px;
+}
+
+.thank-you-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background-color: var(--teal-soft);
+    color: var(--teal);
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.thank-you-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 2vw + 1rem, 1.9rem);
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--ink);
+}
+
+.thank-you-text {
+    color: var(--granite-soft);
+    margin-bottom: 28px;
+    font-size: 15px;
+}
+
+/* ---------- Explore intro (explore.html) ---------- */
+.explore-intro {
+    max-width: 720px;
+    margin-bottom: 40px;
+}
+
+.explore-intro .heading-lg {
+    margin-bottom: 16px;
+}
+
+/* ==========================================
+   Responsive Architecture (Media Queries)
+   ========================================== */
+@media (max-width: 1100px) {
+    .item-matrix {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 1024px) {
+    .item-matrix {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .quick-facts {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .quick-fact:nth-child(2) {
+        border-right: none;
+    }
+
+    .quick-fact:nth-child(3),
+    .quick-fact:nth-child(4) {
+        border-top: 1px solid var(--border-color);
+    }
+
+    .featured-row,
+    .featured-row.is-reversed {
+        grid-template-columns: 1fr;
+    }
+
+    .featured-row.is-reversed .featured-media {
+        order: 0;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 40px;
+    }
+
+    .tips-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .item-matrix,
+    .split-grid,
+    .auth-frame {
+        grid-template-columns: 1fr;
+    }
+
+    .split-grid {
+        gap: 32px;
+    }
+
+    .auth-backdrop {
+        display: none;
+    }
+
+    .auth-panel {
+        padding: 32px 20px;
+    }
+
+    .contact-form-panel {
+        padding: 26px;
+    }
+
+    .quick-facts {
+        grid-template-columns: 1fr;
+        margin-top: -40px;
+    }
+
+    .quick-fact {
+        border-right: none !important;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .quick-fact:first-child {
+        border-top: none;
+    }
+
+    .tips-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 140px;
+    }
+
+    .gallery-item.is-wide {
+        grid-column: span 2;
+    }
+
+    .hero-viewport {
+        min-height: 0;
+        padding: 120px 20px 96px;
+    }
+
+    .cta-actions {
+        flex-direction: column;
+    }
+
+    .cta-actions .action-btn {
+        width: 100%;
+    }
+}
