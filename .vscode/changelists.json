@@ -3,15 +3,7 @@
     {
       "name": "Default",
       "files": [
-        "js/script.js",
-        ".vscode/changelists.json",
-        "css/style.css",
-        "about.html",
-        "contact.html",
-        "explore.html",
-        "index.html",
-        "login.html",
-        "thankyou.html"
+        ".vscode/changelists.json"
       ]
     }
   ],
