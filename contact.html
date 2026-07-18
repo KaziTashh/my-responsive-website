@@ -32,6 +32,11 @@
                     <li><a href="about.html" class="nav-link">About</a></li>
                     <li><a href="explore.html" class="nav-link">Explore</a></li>
                     <li><a href="contact.html" class="nav-link is-active" aria-current="page">Contact</a></li>
+                    <li>
+                        <button type="button" id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle dark and light mode">
+                            <span id="theme-toggle-icon">&#127769;</span>
+                        </button>
+                    </li>
                     <li><a href="login.html" class="action-btn btn-accent action-btn--sm">Sign In</a></li>
                 </ul>
             </nav>
@@ -56,7 +61,7 @@
                 </div>
 
                 <div class="contact-form-panel">
-                    <form action="thankyou.html" method="GET">
+                    <form action="thankyou.html" method="GET" id="contact-form">
                         <div class="form-node">
                             <label for="contact-name">Full name</label>
                             <input type="text" id="contact-name" name="name" placeholder="Your name" required>
@@ -134,5 +139,6 @@
     <div class="lightbox-overlay" data-lightbox-overlay></div>
 
     <script src="js/main.js" defer></script>
+    <script src="js/script.js" defer></script>
 </body>
 </html>
